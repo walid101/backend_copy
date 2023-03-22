@@ -1,0 +1,27 @@
+Django:
+Django-4.1.7 asgiref-3.6.0 sqlparse-0.4.3 tzdata-2022.7
+
+rest_framework:
+djangorestframework-3.14.0 pytz-2022.7.1
+
+requests: 
+certifi>=2017.4.17 in d:\projects\backend_copy\env\lib\site-packages (from requests) (2022.12.7)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in d:\projects\backend_copy\env\lib\site-packages (from requests) (1.26.15)
+Requirement already satisfied: charset-normalizer<4,>=2 in d:\projects\backend_copy\env\lib\site-packages (from requests) (3.1.0)
+Requirement already satisfied: idna<4,>=2.5 in d:\projects\backend_copy\env\lib\site-packages (from requests) (3.4)
+Installing collected packages: requests
+
+pymongo:
+dnspython, pymongo
+
+pillow: pillow
+
+numpy: numpy
+
+skimage: 
+PyWavelets-1.4.1 imageio-2.26.1 lazy_loader-0.2 networkx-3.0 packaging-23.0 scikit-image-0.20.0 scipy-1.10.1 tifffile-2023.3.21
+
+skilearn:
+joblib-1.2.0 scikit-learn-1.2.2 threadpoolctl-3.1.0
+
+dill: dill
