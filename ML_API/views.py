@@ -20,7 +20,7 @@ import skimage.exposure as exposure
 from skimage.transform import resize
 from skimage.feature import hog
 from skimage import io as skio
-from sklearn.svm import LinearSVC, SVC
+from sklearn.svm import LinearSVC, SVC   
 from sklearn.calibration import CalibratedClassifierCV
 # from cv2 import cvtColor, COLOR_BGR2RGB
 import re, json, pickle, dill
@@ -244,7 +244,7 @@ def getImages(name=None, cat=None, classNum = 1):
                image = Image.open(io.BytesIO(img['data']))
           except:
                continue
-          image = None#[cvtColor(np.array(image), COLOR_BGR2RGB), 0 if cat == "Default" else classNum]
+          image = [np.array(image), 0 if cat == "Default" else classNum]
           processed_imgs.append(image)
      return processed_imgs
 
@@ -254,7 +254,7 @@ def loadData(links, cat_name="Default", save=False):
      imgs = []
      for link in links:
           img = Image.open(requests.get(link, stream = True).raw)
-          #imgs.append([cvtColor(np.array(img), COLOR_BGR2RGB), 0 if cat_name == "Default" else 1])
+          imgs.append([np.array(img), 0 if cat_name == "Default" else 1])
           if(save):
                saveImage(im = img, im_name = cat_name if cat_name != None else "Default", category=cat_name)
      return imgs
@@ -310,7 +310,7 @@ def predict(request):
           req_image = None#pred_request['image']
           image = None
           if(url is not None and len(url) > 0):
-               #image = cvtColor(skio.imread(url), COLOR_BGR2RGB)
+               image = np.asarray(skio.imread(url))
                pass
           elif(req_image is not None):
                pass #Real Image was provided (Find where it was uploaded)
@@ -358,7 +358,10 @@ def train(cat_name, cat_imgs, ran_imgs):
      cat_ran_hog_features = []
      cat_ran_hog_imgs = []
      for img in cat_ran_imgs:
-          feature, hog_img = computeHOGfeatures(img)
+          try:
+               feature, hog_img = computeHOGfeatures(img)
+          except:
+               continue
           cat_ran_hog_features.append(feature)
           cat_ran_hog_imgs.append(hog_img)
 
